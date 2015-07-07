@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="profile">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="generationMethod">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="auto"/>
+                            <xs:enumeration value="manual"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="dateInterval">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="startDate">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:date">
+                                        <xs:minExclusive value="1900-01-01"/>
+                                        <xs:maxExclusive value="4712-01-01"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="endDate">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:date">
+                                        <xs:minExclusive value="1900-01-01"/>
+                                        <xs:maxExclusive value="4712-01-01"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:sequence minOccurs="0">
+                    <xs:element name="checkoutCompleted" nillable="true"
+                                type="checkoutCompletedType"/>
+                    <xs:element name="identitySignup" type="identitySignupType"/>
+                    <xs:element name="visitResource" type="visitResourceType"/>
+                    <xs:element name="visitProduct" type="visitProductType"/>
+                    <xs:element name="visitCategory" type="visitCategoryType"/>
+                    <xs:element name="checkoutStart" type="checkoutStartType"/>
+                    <xs:element name="cartAddproduct" type="cartAddproductType"/>
+                    <xs:element name="newsletterSubscribe" type="newsletterSubscribeType"/>
+                </xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="smyrnaConfig">
+        <xs:complexType>
+            <xs:sequence maxOccurs="unbounded">
+                <xs:element ref="profile"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="activityType">
+        <xs:sequence>
+            <xs:element name="count">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int">
+                        <xs:minExclusive value="0"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="sessionId" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="checkoutType">
+        <xs:complexContent>
+            <xs:extension base="activityType">
+                <xs:sequence>
+                    <xs:element name="totalAmount">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:decimal">
+                                <xs:minExclusive value="0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="productQuantity">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:int">
+                                <xs:minExclusive value="0"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="visitorId" type="xs:string"/>
+                    <xs:element name="productName" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="checkoutCompletedType">
+        <xs:complexContent>
+            <xs:extension base="checkoutType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="checkoutStartType">
+        <xs:complexContent>
+            <xs:extension base="checkoutType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="identityType">
+        <xs:complexContent>
+            <xs:extension base="activityType">
+                <xs:sequence>
+                    <xs:element name="visitorId" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="identitySignupType">
+        <xs:complexContent>
+            <xs:extension base="identityType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="visitType">
+        <xs:complexContent>
+            <xs:extension base="activityType">
+                <xs:sequence>
+                    <xs:element name="firstTouch" type="xs:boolean"/>
+                    <xs:element name="newVisitor" type="xs:boolean"/>
+                    <xs:element name="source" type="xs:string"/>
+                    <xs:element name="visitorId" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="visitResourceType">
+        <xs:complexContent>
+            <xs:extension base="visitType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="visitCategoryType">
+        <xs:complexContent>
+            <xs:extension base="visitType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="visitProductType">
+        <xs:complexContent>
+            <xs:extension base="visitType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="cartType">
+        <xs:complexContent>
+            <xs:extension base="activityType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="cartAddproductType">
+        <xs:complexContent>
+            <xs:extension base="cartType">
+                <xs:sequence>
+                    <xs:element name="productName" type="xs:string"/>
+                    <xs:element name="visitorId" type="xs:string"/>
+                    <xs:element name="productQuantity" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="newsletterType">
+        <xs:complexContent>
+            <xs:extension base="activityType"/>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="newsletterSubscribeType">
+        <xs:complexContent>
+            <xs:extension base="newsletterType"/>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>
