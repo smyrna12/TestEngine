@@ -34,6 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="visitorId" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="modelCode" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="modelName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="productName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/extension>
@@ -48,6 +50,8 @@ import javax.xml.bind.annotation.XmlType;
     "totalAmount",
     "productQuantity",
     "visitorId",
+    "modelCode",
+    "modelName",
     "productName"
 })
 @XmlSeeAlso({
@@ -63,6 +67,9 @@ public class CheckoutType
     protected int productQuantity;
     @XmlElement(required = true)
     protected String visitorId;
+    protected int modelCode;
+    @XmlElement(required = true)
+    protected String modelName;
     @XmlElement(required = true)
     protected String productName;
 
@@ -128,6 +135,46 @@ public class CheckoutType
      */
     public void setVisitorId(String value) {
         this.visitorId = value;
+    }
+
+    /**
+     * Gets the value of the modelCode property.
+     * 
+     */
+    public int getModelCode() {
+        return modelCode;
+    }
+
+    /**
+     * Sets the value of the modelCode property.
+     * 
+     */
+    public void setModelCode(int value) {
+        this.modelCode = value;
+    }
+
+    /**
+     * Gets the value of the modelName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getModelName() {
+        return modelName;
+    }
+
+    /**
+     * Sets the value of the modelName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setModelName(String value) {
+        this.modelName = value;
     }
 
     /**

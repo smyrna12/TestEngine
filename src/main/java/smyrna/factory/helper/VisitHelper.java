@@ -1,6 +1,7 @@
 package smyrna.factory.helper;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import smyrna.base.*;
 import smyrna.base.stats.VisitStats;
 import smyrna.tester.Consts;
@@ -30,17 +31,26 @@ public class VisitHelper {
         Random rnd = new Random();
         data.setFirstTouch(rnd.nextBoolean());
         data.setNewVisitor(rnd.nextBoolean());
+        if (type.equals(ActivityType.VP)) {
+            int productQuantity = RandomUtils.nextInt(Consts.PRODUCT_QUANTITY_START_INCLUSIVE, Consts.PRODUCT_QUANTITY_END_EXCLUSIVE);
+            ProductName prod = ProductName.getRandom();
+            Product product = new Product.Builder().name(prod.name()).modelCode(prod.modelCode).modelName(prod.modelName).quantity(productQuantity).build();
+            data.getProducts().add(product);
+        }
         String visitorId = RandomStringUtils.randomNumeric(Consts.VISITOR_ID_LENGTH);
         Body body = new Body.Builder().activityCode(type.value).activity(type.num).visitorId(visitorId).data(data).build();
 
         return new Activity.Builder().created(beginDate, endDate).header(header).body(body).build();
     }
 
-    public Activity createVisit(ActivityType type, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source) {
+    public Activity createVisit(ActivityType type, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source,
+                                String productName, Integer modelCode, String modelName, Integer productQuantity) {
         Header header = new Header.Builder().appKey(appKey).utmSource(source).sessionId(sessionId).build();
         Data data = new Data();
         data.setFirstTouch(firstTouch);
         data.setNewVisitor(newVisitor);
+        Product product = new Product.Builder().name(productName).modelCode(modelCode).modelName(modelName).quantity(productQuantity).build();
+        data.getProducts().add(product);
         Body body = new Body.Builder().activityCode(type.value).activity(type.num).visitorId(visitorId).data(data).build();
 
         return new Activity.Builder().created(beginDate, endDate).header(header).body(body).build();

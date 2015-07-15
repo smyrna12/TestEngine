@@ -22,9 +22,10 @@ import java.util.List;
 public class CheckoutStartFactory extends ActivityFactory {
     private CheckoutHelper cHelper;
 
-    Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, Integer productQuantity, BigDecimal totalAmount, String visitorId, String productName) {
+    Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, Integer productQuantity, BigDecimal totalAmount, String visitorId,
+                         String productName, Integer modelCode, String modelName) {
         cHelper = new CheckoutHelper(appKey, beginDate, endDate);
-        return cHelper.createCheckout(ActivityType.CS, sessionId, productQuantity, totalAmount, visitorId, productName);
+        return cHelper.createCheckout(ActivityType.CS, sessionId, productQuantity, totalAmount, visitorId, productName, modelCode, modelName);
     }
 
     @Override
@@ -50,7 +51,8 @@ public class CheckoutStartFactory extends ActivityFactory {
             for (int i = 0; i < cStartCount; i++) {
                 Activity activity = getActivity(profile.getName(), beginDateStr, endDateStr, profile.getCheckoutStart().getSessionId(),
                         profile.getCheckoutStart().getProductQuantity(), profile.getCheckoutStart().getTotalAmount(),
-                        profile.getCheckoutStart().getVisitorId(), profile.getCheckoutStart().getProductName());
+                        profile.getCheckoutStart().getVisitorId(), profile.getCheckoutStart().getProductName(), profile.getCheckoutStart().getModelCode(),
+                        profile.getCheckoutStart().getModelName());
                 activityList.add(activity);
             }
         }

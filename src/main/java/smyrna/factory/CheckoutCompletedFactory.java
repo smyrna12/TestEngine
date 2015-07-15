@@ -22,9 +22,10 @@ import java.util.List;
 public class CheckoutCompletedFactory extends ActivityFactory {
     private CheckoutHelper cHelper;
 
-    Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, Integer productQuantity, BigDecimal totalAmount, String visitorId, String productName) {
+    Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, Integer productQuantity, BigDecimal totalAmount, String visitorId,
+                         String productName, Integer modelCode, String modelName) {
         cHelper = new CheckoutHelper(appKey, beginDate, endDate);
-        return cHelper.createCheckout(ActivityType.CC, sessionId, productQuantity, totalAmount, visitorId, productName);
+        return cHelper.createCheckout(ActivityType.CC, sessionId, productQuantity, totalAmount, visitorId, productName, modelCode, modelName);
     }
 
     @Override
@@ -48,9 +49,10 @@ public class CheckoutCompletedFactory extends ActivityFactory {
         } else {
             cCompletedCount = profile.getCheckoutCompleted().getValue().getCount();
             for (int i = 0; i < cCompletedCount; i++) {
-                Activity activity = getActivity(profile.getName(), beginDateStr, endDateStr, profile.getCheckoutStart().getSessionId(),
-                        profile.getCheckoutStart().getProductQuantity(), profile.getCheckoutStart().getTotalAmount(),
-                        profile.getCheckoutStart().getVisitorId(), profile.getCheckoutStart().getProductName());
+                Activity activity = getActivity(profile.getName(), beginDateStr, endDateStr, profile.getCheckoutCompleted().getValue().getSessionId(),
+                        profile.getCheckoutCompleted().getValue().getProductQuantity(), profile.getCheckoutCompleted().getValue().getTotalAmount(),
+                        profile.getCheckoutCompleted().getValue().getVisitorId(), profile.getCheckoutCompleted().getValue().getProductName(),
+                        profile.getCheckoutCompleted().getValue().getModelCode(), profile.getCheckoutCompleted().getValue().getModelName());
                 activityList.add(activity);
             }
         }

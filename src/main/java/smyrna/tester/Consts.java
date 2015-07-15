@@ -5,8 +5,8 @@ package smyrna.tester;
  */
 public class Consts {
 
-    public static final int VISIT_RESOURCE_COUNT_START_INCLUSIVE = 10;
-    public static final int VISIT_RESOURCE_COUNT_END_EXCLUSIVE = 30;
+    public static final int VISIT_RESOURCE_COUNT_START_INCLUSIVE = 100;
+    public static final int VISIT_RESOURCE_COUNT_END_EXCLUSIVE = 300;
 
     public static final int PRODUCT_QUANTITY_START_INCLUSIVE = 1;
     public static final int PRODUCT_QUANTITY_END_EXCLUSIVE = 5;

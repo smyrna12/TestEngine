@@ -87,6 +87,8 @@
                         </xs:simpleType>
                     </xs:element>
                     <xs:element name="visitorId" type="xs:string"/>
+                    <xs:element name="modelCode" type="xs:int"/>
+                    <xs:element name="modelName" type="xs:string"/>
                     <xs:element name="productName" type="xs:string"/>
                 </xs:sequence>
             </xs:extension>
@@ -140,7 +142,14 @@
     </xs:complexType>
     <xs:complexType name="visitProductType">
         <xs:complexContent>
-            <xs:extension base="visitType"/>
+            <xs:extension base="visitType">
+                <xs:sequence>
+                    <xs:element name="modelCode" type="xs:int"/>
+                    <xs:element name="productName" type="xs:string"/>
+                    <xs:element name="productQuantity" type="xs:int"/>
+                    <xs:element name="modelName" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="cartType">

@@ -21,9 +21,10 @@ import java.util.List;
 public class VisitProductFactory extends ActivityFactory {
     private VisitHelper vHelper;
 
-    Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source) {
+    Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source,
+                         String productName, int modelCode, String modelName, int productQuantity) {
         vHelper = new VisitHelper(appKey, beginDate, endDate);
-        return vHelper.createVisit(ActivityType.VP, sessionId, visitorId, firstTouch, newVisitor, source);
+        return vHelper.createVisit(ActivityType.VP, sessionId, visitorId, firstTouch, newVisitor, source, productName, modelCode, modelName, productQuantity);
     }
 
     @Override
@@ -47,8 +48,9 @@ public class VisitProductFactory extends ActivityFactory {
         } else {
             visitPCount = profile.getVisitProduct().getCount();
             for (int i = 0; i < visitPCount; i++) {
-                Activity activity = getActivity(profile.getName(), beginDateStr, endDateStr, profile.getVisitResource().getSessionId(), profile.getVisitResource().getVisitorId(),
-                        profile.getVisitResource().isFirstTouch(), profile.getVisitResource().isNewVisitor(), profile.getVisitResource().getSource());
+                Activity activity = getActivity(profile.getName(), beginDateStr, endDateStr, profile.getVisitProduct().getSessionId(), profile.getVisitProduct().getVisitorId(),
+                        profile.getVisitProduct().isFirstTouch(), profile.getVisitProduct().isNewVisitor(), profile.getVisitProduct().getSource(),
+                        profile.getVisitProduct().getProductName(), profile.getVisitProduct().getModelCode(), profile.getVisitProduct().getModelName(), profile.getVisitProduct().getProductQuantity());
                 activityList.add(activity);
             }
         }

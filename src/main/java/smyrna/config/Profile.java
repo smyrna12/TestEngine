@@ -1,15 +1,21 @@
+
 package smyrna.config;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * <p/>
+ * 
  * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
+ * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -66,21 +72,23 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
+ * 
+ * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-        "name",
-        "generationMethod",
-        "dateInterval",
-        "environment",
-        "checkoutCompleted",
-        "identitySignup",
-        "visitResource",
-        "visitProduct",
-        "visitCategory",
-        "checkoutStart",
-        "cartAddproduct",
-        "newsletterSubscribe"
+    "name",
+    "generationMethod",
+    "dateInterval",
+    "environment",
+    "checkoutCompleted",
+    "identitySignup",
+    "visitResource",
+    "visitProduct",
+    "visitCategory",
+    "checkoutStart",
+    "cartAddproduct",
+    "newsletterSubscribe"
 })
 @XmlRootElement(name = "profile")
 public class Profile {
@@ -105,9 +113,11 @@ public class Profile {
 
     /**
      * Gets the value of the name property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getName() {
         return name;
@@ -115,9 +125,11 @@ public class Profile {
 
     /**
      * Sets the value of the name property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setName(String value) {
         this.name = value;
@@ -125,9 +137,11 @@ public class Profile {
 
     /**
      * Gets the value of the generationMethod property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getGenerationMethod() {
         return generationMethod;
@@ -135,9 +149,11 @@ public class Profile {
 
     /**
      * Sets the value of the generationMethod property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setGenerationMethod(String value) {
         this.generationMethod = value;
@@ -145,9 +161,11 @@ public class Profile {
 
     /**
      * Gets the value of the dateInterval property.
-     *
-     * @return possible object is
-     * {@link Profile.DateInterval }
+     * 
+     * @return
+     *     possible object is
+     *     {@link Profile.DateInterval }
+     *     
      */
     public Profile.DateInterval getDateInterval() {
         return dateInterval;
@@ -155,9 +173,11 @@ public class Profile {
 
     /**
      * Sets the value of the dateInterval property.
-     *
-     * @param value allowed object is
-     *              {@link Profile.DateInterval }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Profile.DateInterval }
+     *     
      */
     public void setDateInterval(Profile.DateInterval value) {
         this.dateInterval = value;
@@ -165,9 +185,11 @@ public class Profile {
 
     /**
      * Gets the value of the environment property.
-     *
-     * @return possible object is
-     * {@link String }
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
     public String getEnvironment() {
         return environment;
@@ -175,9 +197,11 @@ public class Profile {
 
     /**
      * Sets the value of the environment property.
-     *
-     * @param value allowed object is
-     *              {@link String }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
     public void setEnvironment(String value) {
         this.environment = value;
@@ -185,9 +209,11 @@ public class Profile {
 
     /**
      * Gets the value of the checkoutCompleted property.
-     *
-     * @return possible object is
-     * {@link JAXBElement }{@code <}{@link CheckoutCompletedType }{@code >}
+     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link CheckoutCompletedType }{@code >}
+     *     
      */
     public JAXBElement<CheckoutCompletedType> getCheckoutCompleted() {
         return checkoutCompleted;
@@ -195,9 +221,11 @@ public class Profile {
 
     /**
      * Sets the value of the checkoutCompleted property.
-     *
-     * @param value allowed object is
-     *              {@link JAXBElement }{@code <}{@link CheckoutCompletedType }{@code >}
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link CheckoutCompletedType }{@code >}
+     *     
      */
     public void setCheckoutCompleted(JAXBElement<CheckoutCompletedType> value) {
         this.checkoutCompleted = value;
@@ -205,9 +233,11 @@ public class Profile {
 
     /**
      * Gets the value of the identitySignup property.
-     *
-     * @return possible object is
-     * {@link IdentitySignupType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link IdentitySignupType }
+     *     
      */
     public IdentitySignupType getIdentitySignup() {
         return identitySignup;
@@ -215,9 +245,11 @@ public class Profile {
 
     /**
      * Sets the value of the identitySignup property.
-     *
-     * @param value allowed object is
-     *              {@link IdentitySignupType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link IdentitySignupType }
+     *     
      */
     public void setIdentitySignup(IdentitySignupType value) {
         this.identitySignup = value;
@@ -225,9 +257,11 @@ public class Profile {
 
     /**
      * Gets the value of the visitResource property.
-     *
-     * @return possible object is
-     * {@link VisitResourceType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link VisitResourceType }
+     *     
      */
     public VisitResourceType getVisitResource() {
         return visitResource;
@@ -235,9 +269,11 @@ public class Profile {
 
     /**
      * Sets the value of the visitResource property.
-     *
-     * @param value allowed object is
-     *              {@link VisitResourceType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link VisitResourceType }
+     *     
      */
     public void setVisitResource(VisitResourceType value) {
         this.visitResource = value;
@@ -245,9 +281,11 @@ public class Profile {
 
     /**
      * Gets the value of the visitProduct property.
-     *
-     * @return possible object is
-     * {@link VisitProductType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link VisitProductType }
+     *     
      */
     public VisitProductType getVisitProduct() {
         return visitProduct;
@@ -255,9 +293,11 @@ public class Profile {
 
     /**
      * Sets the value of the visitProduct property.
-     *
-     * @param value allowed object is
-     *              {@link VisitProductType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link VisitProductType }
+     *     
      */
     public void setVisitProduct(VisitProductType value) {
         this.visitProduct = value;
@@ -265,9 +305,11 @@ public class Profile {
 
     /**
      * Gets the value of the visitCategory property.
-     *
-     * @return possible object is
-     * {@link VisitCategoryType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link VisitCategoryType }
+     *     
      */
     public VisitCategoryType getVisitCategory() {
         return visitCategory;
@@ -275,9 +317,11 @@ public class Profile {
 
     /**
      * Sets the value of the visitCategory property.
-     *
-     * @param value allowed object is
-     *              {@link VisitCategoryType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link VisitCategoryType }
+     *     
      */
     public void setVisitCategory(VisitCategoryType value) {
         this.visitCategory = value;
@@ -285,9 +329,11 @@ public class Profile {
 
     /**
      * Gets the value of the checkoutStart property.
-     *
-     * @return possible object is
-     * {@link CheckoutStartType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CheckoutStartType }
+     *     
      */
     public CheckoutStartType getCheckoutStart() {
         return checkoutStart;
@@ -295,9 +341,11 @@ public class Profile {
 
     /**
      * Sets the value of the checkoutStart property.
-     *
-     * @param value allowed object is
-     *              {@link CheckoutStartType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CheckoutStartType }
+     *     
      */
     public void setCheckoutStart(CheckoutStartType value) {
         this.checkoutStart = value;
@@ -305,9 +353,11 @@ public class Profile {
 
     /**
      * Gets the value of the cartAddproduct property.
-     *
-     * @return possible object is
-     * {@link CartAddproductType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link CartAddproductType }
+     *     
      */
     public CartAddproductType getCartAddproduct() {
         return cartAddproduct;
@@ -315,9 +365,11 @@ public class Profile {
 
     /**
      * Sets the value of the cartAddproduct property.
-     *
-     * @param value allowed object is
-     *              {@link CartAddproductType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link CartAddproductType }
+     *     
      */
     public void setCartAddproduct(CartAddproductType value) {
         this.cartAddproduct = value;
@@ -325,9 +377,11 @@ public class Profile {
 
     /**
      * Gets the value of the newsletterSubscribe property.
-     *
-     * @return possible object is
-     * {@link NewsletterSubscribeType }
+     * 
+     * @return
+     *     possible object is
+     *     {@link NewsletterSubscribeType }
+     *     
      */
     public NewsletterSubscribeType getNewsletterSubscribe() {
         return newsletterSubscribe;
@@ -335,9 +389,11 @@ public class Profile {
 
     /**
      * Sets the value of the newsletterSubscribe property.
-     *
-     * @param value allowed object is
-     *              {@link NewsletterSubscribeType }
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link NewsletterSubscribeType }
+     *     
      */
     public void setNewsletterSubscribe(NewsletterSubscribeType value) {
         this.newsletterSubscribe = value;
@@ -346,9 +402,9 @@ public class Profile {
 
     /**
      * <p>Java class for anonymous complex type.
-     * <p/>
+     * 
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -375,11 +431,13 @@ public class Profile {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
+     * 
+     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-            "startDate",
-            "endDate"
+        "startDate",
+        "endDate"
     })
     public static class DateInterval {
 
@@ -390,9 +448,11 @@ public class Profile {
 
         /**
          * Gets the value of the startDate property.
-         *
-         * @return possible object is
-         * {@link XMLGregorianCalendar }
+         * 
+         * @return
+         *     possible object is
+         *     {@link XMLGregorianCalendar }
+         *     
          */
         public XMLGregorianCalendar getStartDate() {
             return startDate;
@@ -400,9 +460,11 @@ public class Profile {
 
         /**
          * Sets the value of the startDate property.
-         *
-         * @param value allowed object is
-         *              {@link XMLGregorianCalendar }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link XMLGregorianCalendar }
+         *     
          */
         public void setStartDate(XMLGregorianCalendar value) {
             this.startDate = value;
@@ -410,9 +472,11 @@ public class Profile {
 
         /**
          * Gets the value of the endDate property.
-         *
-         * @return possible object is
-         * {@link XMLGregorianCalendar }
+         * 
+         * @return
+         *     possible object is
+         *     {@link XMLGregorianCalendar }
+         *     
          */
         public XMLGregorianCalendar getEndDate() {
             return endDate;
@@ -420,9 +484,11 @@ public class Profile {
 
         /**
          * Sets the value of the endDate property.
-         *
-         * @param value allowed object is
-         *              {@link XMLGregorianCalendar }
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link XMLGregorianCalendar }
+         *     
          */
         public void setEndDate(XMLGregorianCalendar value) {
             this.endDate = value;

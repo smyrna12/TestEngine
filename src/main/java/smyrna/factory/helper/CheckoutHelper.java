@@ -29,13 +29,13 @@ public class CheckoutHelper {
     }
 
     public Activity createCheckout(ActivityType type, String sessionId, Integer productQuantity, BigDecimal totalAmount, String visitorId,
-                                   String productName) {
+                                   String productName, Integer modelCode, String modelName) {
         Header header = new Header.Builder().appKey(appKey).sessionId(sessionId).build();
         Data data = new Data();
         Random rnd = new Random();
         data.setFirstTouch(rnd.nextBoolean());
         data.setNewVisitor(rnd.nextBoolean());
-        Product product = new Product.Builder().name(productName).quantity(productQuantity).build();
+        Product product = new Product.Builder().name(productName).modelCode(modelCode).modelName(modelName).quantity(productQuantity).build();
         data.setTotalAmount(totalAmount);
         data.getProducts().add(product);
         Body body = new Body.Builder().activityCode(type.value).activity(type.num).visitorId(visitorId).data(data).build();
@@ -55,7 +55,7 @@ public class CheckoutHelper {
         int unitPrice = RandomUtils.nextInt(Consts.UNIT_PRICE_START_INCLUSIVE, Consts.UNIT_PRICE_END_EXCLUSIVE);
         ProductName prod = ProductName.getRandom();
         BigDecimal totalPrice = new BigDecimal(productQuantity * unitPrice);
-        Product product = new Product.Builder().name(prod.name()).modelCode(prod.modelCode).quantity(productQuantity).totalPrice(totalPrice).unitPrice(new BigDecimal(unitPrice)).build();
+        Product product = new Product.Builder().name(prod.name()).modelCode(prod.modelCode).modelName(prod.modelName).quantity(productQuantity).totalPrice(totalPrice).unitPrice(new BigDecimal(unitPrice)).build();
         data.setTotalAmount(totalPrice);
         data.getProducts().add(product);
 

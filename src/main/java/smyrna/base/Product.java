@@ -7,6 +7,7 @@ import java.math.BigDecimal;
  */
 public class Product {
     private final Integer modelCode;
+    private final String modelName;
     private final String name;
     private final BigDecimal unitPrice;
     private final Integer quantity;
@@ -23,6 +24,7 @@ public class Product {
         this.itemCode = builder.itemCode;
         this.currency = builder.currency;
         this.totalPrice = builder.totalPrice;
+        this.modelName = builder.modelName;
     }
 
     public Integer getModelCode() {
@@ -39,6 +41,7 @@ public class Product {
 
     public static class Builder {
         private Integer modelCode;
+        private String modelName;
         private String name;
         private BigDecimal unitPrice;
         private Integer quantity;
@@ -49,6 +52,11 @@ public class Product {
         //builder methods for setting property
         public Builder modelCode(Integer modelCode) {
             this.modelCode = modelCode;
+            return this;
+        }
+
+        public Builder modelName(String modelName) {
+            this.modelName = modelName;
             return this;
         }
 
