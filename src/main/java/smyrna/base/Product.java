@@ -1,6 +1,7 @@
 package smyrna.base;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by Erdem.Akdogan on 6/4/15
@@ -14,6 +15,7 @@ public class Product {
     private final String itemCode;
     private final String currency;
     private final BigDecimal totalPrice;
+    private final List<Category> categories;
 
     //private constructor to enforce object creation through builder
     private Product(Builder builder) {
@@ -25,6 +27,7 @@ public class Product {
         this.currency = builder.currency;
         this.totalPrice = builder.totalPrice;
         this.modelName = builder.modelName;
+        this.categories = builder.categories;
     }
 
     public Integer getModelCode() {
@@ -39,6 +42,10 @@ public class Product {
         return quantity;
     }
 
+    public final List<Category> getCategories() {
+        return categories;
+    }
+
     public static class Builder {
         private Integer modelCode;
         private String modelName;
@@ -48,6 +55,7 @@ public class Product {
         private String itemCode;
         private String currency;
         private BigDecimal totalPrice;
+        private List<Category> categories;
 
         //builder methods for setting property
         public Builder modelCode(Integer modelCode) {
@@ -87,6 +95,11 @@ public class Product {
 
         public Builder totalPrice(BigDecimal totalPrice) {
             this.totalPrice = totalPrice;
+            return this;
+        }
+
+        public Builder categories(List<Category> categories) {
+            this.categories = categories;
             return this;
         }
 

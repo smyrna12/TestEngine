@@ -21,9 +21,10 @@ import java.util.List;
 public class VisitCategoryFactory extends ActivityFactory {
     private VisitHelper vHelper;
 
-    Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source) {
+    Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source,
+                         Integer categoryId, String categoryName) {
         vHelper = new VisitHelper(appKey, beginDate, endDate);
-        return vHelper.createVisit(ActivityType.VC, sessionId, visitorId, firstTouch, newVisitor, source, null, null, null, null);
+        return vHelper.createVisit(ActivityType.VC, sessionId, visitorId, firstTouch, newVisitor, source, null, null, null, null, categoryId, categoryName);
     }
 
     @Override
@@ -48,7 +49,8 @@ public class VisitCategoryFactory extends ActivityFactory {
             visitCCount = profile.getVisitCategory().getCount();
             for (int i = 0; i < visitCCount; i++) {
                 Activity activity = getActivity(profile.getName(), beginDateStr, endDateStr, profile.getVisitCategory().getSessionId(), profile.getVisitCategory().getVisitorId(),
-                        profile.getVisitCategory().isFirstTouch(), profile.getVisitCategory().isNewVisitor(), profile.getVisitCategory().getSource());
+                        profile.getVisitCategory().isFirstTouch(), profile.getVisitCategory().isNewVisitor(), profile.getVisitCategory().getSource(),
+                        profile.getVisitCategory().getCategoryId(), profile.getVisitCategory().getCategoryName());
                 activityList.add(activity);
             }
         }

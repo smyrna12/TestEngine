@@ -23,7 +23,7 @@ public class VisitResourceFactory extends ActivityFactory {
 
     Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source) {
         vHelper = new VisitHelper(appKey, beginDate, endDate);
-        return vHelper.createVisit(ActivityType.VR, sessionId, visitorId, firstTouch, newVisitor, source, null, null, null, null);
+        return vHelper.createVisit(ActivityType.VR, sessionId, visitorId, firstTouch, newVisitor, source, null, null, null, null, null, null);
     }
 
     @Override

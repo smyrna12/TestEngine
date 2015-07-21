@@ -24,7 +24,7 @@ public class VisitProductFactory extends ActivityFactory {
     Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source,
                          String productName, int modelCode, String modelName, int productQuantity) {
         vHelper = new VisitHelper(appKey, beginDate, endDate);
-        return vHelper.createVisit(ActivityType.VP, sessionId, visitorId, firstTouch, newVisitor, source, productName, modelCode, modelName, productQuantity);
+        return vHelper.createVisit(ActivityType.VP, sessionId, visitorId, firstTouch, newVisitor, source, productName, modelCode, modelName, productQuantity, null, null);
     }
 
     @Override

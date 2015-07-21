@@ -178,9 +178,9 @@ class TestBuilder {
         try {
             String urlString;
             if (test) {
-                urlString = "http://54.93.81.127:81/" + "/activity/push";
+                urlString = "http://54.93.81.127:81/activity/push";
             } else {
-                urlString = "http://172.31.29.193:81/" + "/activity/push";
+                urlString = "http://172.31.29.193:81/activity/push";
             }
             logger2.info("ws url: " + urlString);
             URL url = new URL(urlString);

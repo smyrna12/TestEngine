@@ -137,7 +137,12 @@
     </xs:complexType>
     <xs:complexType name="visitCategoryType">
         <xs:complexContent>
-            <xs:extension base="visitType"/>
+            <xs:extension base="visitType">
+                <xs:sequence>
+                    <xs:element name="categoryName" type="xs:string"/>
+                    <xs:element name="categoryId" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="visitProductType">

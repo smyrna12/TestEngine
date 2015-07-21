@@ -1,11 +1,11 @@
 package smyrna.factory.helper;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import smyrna.base.*;
 import smyrna.base.stats.VisitStats;
 import smyrna.tester.Consts;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -31,10 +31,11 @@ public class VisitHelper {
         Random rnd = new Random();
         data.setFirstTouch(rnd.nextBoolean());
         data.setNewVisitor(rnd.nextBoolean());
-        if (type.equals(ActivityType.VP)) {
-            int productQuantity = RandomUtils.nextInt(Consts.PRODUCT_QUANTITY_START_INCLUSIVE, Consts.PRODUCT_QUANTITY_END_EXCLUSIVE);
+        if (type.equals(ActivityType.VP) || type.equals(ActivityType.VC)) {
             ProductName prod = ProductName.getRandom();
-            Product product = new Product.Builder().name(prod.name()).modelCode(prod.modelCode).modelName(prod.modelName).quantity(productQuantity).build();
+            Category category = new Category.Builder().categoryId(prod.categoryId).categoryName(prod.categoryName).build();
+            List<Category> categories = Arrays.asList(category);
+            Product product = new Product.Builder().name(prod.name()).modelCode(prod.modelCode).modelName(prod.modelName).categories(categories).build();
             data.getProducts().add(product);
         }
         String visitorId = RandomStringUtils.randomNumeric(Consts.VISITOR_ID_LENGTH);
@@ -44,12 +45,14 @@ public class VisitHelper {
     }
 
     public Activity createVisit(ActivityType type, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source,
-                                String productName, Integer modelCode, String modelName, Integer productQuantity) {
+                                String productName, Integer modelCode, String modelName, Integer productQuantity, Integer categoryId, String categoryName) {
         Header header = new Header.Builder().appKey(appKey).utmSource(source).sessionId(sessionId).build();
         Data data = new Data();
         data.setFirstTouch(firstTouch);
         data.setNewVisitor(newVisitor);
-        Product product = new Product.Builder().name(productName).modelCode(modelCode).modelName(modelName).quantity(productQuantity).build();
+        Category category = new Category.Builder().categoryId(categoryId).categoryName(categoryName).build();
+        List<Category> categories = Arrays.asList(category);
+        Product product = new Product.Builder().name(productName).modelCode(modelCode).modelName(modelName).quantity(productQuantity).categories(categories).build();
         data.getProducts().add(product);
         Body body = new Body.Builder().activityCode(type.value).activity(type.num).visitorId(visitorId).data(data).build();
 
