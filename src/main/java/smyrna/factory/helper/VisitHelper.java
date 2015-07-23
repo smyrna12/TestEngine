@@ -49,15 +49,20 @@ public class VisitHelper {
     }
 
     public Activity createVisit(ActivityType type, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source,
-                                String productName, Integer modelCode, String modelName, Integer productQuantity, Integer categoryId, String categoryName) {
+                                String productName, Integer modelCode, String modelName, Integer categoryId, String categoryName) {
         Header header = new Header.Builder().appKey(appKey).utmSource(source).sessionId(sessionId).build();
         Data data = new Data();
         data.setFirstTouch(firstTouch);
         data.setNewVisitor(newVisitor);
-        Category category = new Category.Builder().categoryId(categoryId).categoryName(categoryName).build();
-        List<Category> categories = Arrays.asList(category);
-        Product product = new Product.Builder().name(productName).modelCode(modelCode).modelName(modelName).quantity(productQuantity).categories(categories).build();
-        data.getProducts().add(product);
+        if (type.equals(ActivityType.VP)) {
+            Category category = new Category.Builder().categoryId(categoryId).categoryName(categoryName).build();
+            List<Category> categories = Arrays.asList(category);
+            Product product = new Product.Builder().name(productName).modelCode(modelCode).modelName(modelName).categories(categories).build();
+            data.getProducts().add(product);
+        } else if (type.equals(ActivityType.VC)) {
+            Category category = new Category.Builder().categoryId(categoryId).categoryName(categoryName).build();
+            data.setCategory(category);
+        }
         Body body = new Body.Builder().activityCode(type.value).activity(type.num).visitorId(visitorId).data(data).build();
 
         return new Activity.Builder().created(beginDate, endDate).header(header).body(body).build();

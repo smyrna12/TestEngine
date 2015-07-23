@@ -22,9 +22,9 @@ public class VisitProductFactory extends ActivityFactory {
     private VisitHelper vHelper;
 
     Activity getActivity(String appKey, String beginDate, String endDate, String sessionId, String visitorId, boolean firstTouch, boolean newVisitor, String source,
-                         String productName, int modelCode, String modelName, int productQuantity) {
+                         String productName, int modelCode, String modelName) {
         vHelper = new VisitHelper(appKey, beginDate, endDate);
-        return vHelper.createVisit(ActivityType.VP, sessionId, visitorId, firstTouch, newVisitor, source, productName, modelCode, modelName, productQuantity, null, null);
+        return vHelper.createVisit(ActivityType.VP, sessionId, visitorId, firstTouch, newVisitor, source, productName, modelCode, modelName, null, null);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class VisitProductFactory extends ActivityFactory {
             for (int i = 0; i < visitPCount; i++) {
                 Activity activity = getActivity(profile.getName(), beginDateStr, endDateStr, profile.getVisitProduct().getSessionId(), profile.getVisitProduct().getVisitorId(),
                         profile.getVisitProduct().isFirstTouch(), profile.getVisitProduct().isNewVisitor(), profile.getVisitProduct().getSource(),
-                        profile.getVisitProduct().getProductName(), profile.getVisitProduct().getModelCode(), profile.getVisitProduct().getModelName(), profile.getVisitProduct().getProductQuantity());
+                        profile.getVisitProduct().getProductName(), profile.getVisitProduct().getModelCode(), profile.getVisitProduct().getModelName());
                 activityList.add(activity);
             }
         }
