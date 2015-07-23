@@ -13,6 +13,7 @@ public class Data {
     private BigDecimal totalAmount;
     private int orderId;
     private List<Product> products;
+    private Category category;
 
     public boolean isNewVisitor() {
         return newVisitor;
@@ -52,5 +53,13 @@ public class Data {
         }
 
         return products;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -31,12 +31,16 @@ public class VisitHelper {
         Random rnd = new Random();
         data.setFirstTouch(rnd.nextBoolean());
         data.setNewVisitor(rnd.nextBoolean());
-        if (type.equals(ActivityType.VP) || type.equals(ActivityType.VC)) {
+        if (type.equals(ActivityType.VP)) {
             ProductName prod = ProductName.getRandom();
             Category category = new Category.Builder().categoryId(prod.categoryId).categoryName(prod.categoryName).build();
             List<Category> categories = Arrays.asList(category);
             Product product = new Product.Builder().name(prod.name()).modelCode(prod.modelCode).modelName(prod.modelName).categories(categories).build();
             data.getProducts().add(product);
+        } else if (type.equals(ActivityType.VC)) {
+            ProductName prod = ProductName.getRandom();
+            Category category = new Category.Builder().categoryId(prod.categoryId).categoryName(prod.categoryName).build();
+            data.setCategory(category);
         }
         String visitorId = RandomStringUtils.randomNumeric(Consts.VISITOR_ID_LENGTH);
         Body body = new Body.Builder().activityCode(type.value).activity(type.num).visitorId(visitorId).data(data).build();
