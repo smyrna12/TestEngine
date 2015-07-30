@@ -71,7 +71,6 @@ public class ActivityTest {
     public void testBasic() throws Exception {
         TestBuilder builder = new TestBuilder(true);
         builder.build();
-
     }
 
     @Test

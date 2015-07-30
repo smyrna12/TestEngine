@@ -162,11 +162,11 @@ class TestBuilder {
 
     private List<Activity> processActivityList(List<Activity> activityList) {
         List<Activity> nActivityList = new ArrayList<>();
-        for (int i = 0; i < activityList.size(); i++) {
-            int response = sendActivity(activityList.get(i));
+        for (Activity activity : activityList) {
+            int response = sendActivity(activity);
             if (response == 0) {
-                nActivityList.add(activityList.get(i));
-                logger2.info(gson.toJson(activityList.get(i), Activity.class));
+                nActivityList.add(activity);
+                logger2.info(gson.toJson(activity, Activity.class));
             }
         }
         return nActivityList;
@@ -182,7 +182,7 @@ class TestBuilder {
             } else {
                 urlString = "http://172.31.29.193:81/activity/push";
             }
-            logger2.info("ws url: " + urlString);
+
             URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
@@ -222,16 +222,16 @@ class TestBuilder {
             float repVisPer = (float) (vStats.getCount() - vStats.getNewVisCount()) / vStats.getVisitorMap().size();
             BigDecimal bd4 = new BigDecimal(Float.toString(repVisPer));
             bd4 = bd4.setScale(2, BigDecimal.ROUND_HALF_UP);
-            double unCompCheckPer = (cStartCount - cCompletedCount) / cStartCount;
+            double unCompCheckPer = (double) (cStartCount - cCompletedCount) / (double) cStartCount;
             BigDecimal bd5 = new BigDecimal(Double.toString(unCompCheckPer));
             bd5 = bd5.setScale(2, BigDecimal.ROUND_HALF_UP);
-            double nSubscPer = nSubscribeCount / vStats.getTotVisCount();
+            double nSubscPer = (double) nSubscribeCount / vStats.getTotVisCount();
             BigDecimal bd6 = new BigDecimal(Double.toString(nSubscPer));
             bd6 = bd6.setScale(2, BigDecimal.ROUND_HALF_UP);
 
             String visitInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.visit.resource.information"), vStats.getCount(),
                     vStats.getTotVisCount(), vStats.getVisitorMap().size(), vStats.getNewVisCount(),
-                    bd.floatValue() * 100, bd2.floatValue() * 100, bd4.floatValue() * 100, vCategoryCount / vStats.getCount(), vProductCount / vStats.getCount());
+                    bd.floatValue() * 100, bd2.floatValue() * 100, bd4.floatValue() * 100, (double) vCategoryCount / vStats.getCount(), (double) vProductCount / vStats.getCount());
             logger.info(visitInfoMsg);
 
             String visitSourceInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.visit.source.information"),
@@ -240,7 +240,7 @@ class TestBuilder {
                     vStats.getSourceMap().get(smyrna.base.Source.Direct.name()));
             logger.info(visitSourceInfoMsg);
 
-            String signupInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.identity.signup.information"), iSignupCount, iSignupCount, iSignupCount, iSignupCount / vStats.getTotVisCount());
+            String signupInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.identity.signup.information"), iSignupCount, iSignupCount, iSignupCount, (double) iSignupCount / vStats.getTotVisCount());
             logger.info(signupInfoMsg);
 
             String cCompletedInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.checkout.completed.information"), cCompletedCount,
