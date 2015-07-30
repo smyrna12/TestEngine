@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import smyrna.base.Activity;
 import smyrna.base.ActivityType;
+import smyrna.base.stats.CheckoutStats;
 import smyrna.config.Profile;
 import smyrna.config.SmyrnaConfig;
 import smyrna.factory.ActivityFactory;
@@ -83,6 +84,26 @@ public class ActivityTest {
                 activityList = factory.getActivityList(profile, 10);
                 assertTrue(activityList.size() > 0);
                 System.out.println(gson.toJson(activityList.get(0), Activity.class));
+            }
+        }
+    }
+
+    @Test
+    public void shouldProduceCheckoutCompletedAndGenerateStats() {
+        for (Profile profile : config.getProfile()) {
+            CheckoutStats cStats = null;
+            int iSignupCount = 0;
+            ActivityFactory factory = ActivityFactoryProducer.getFactory(ActivityType.CC);
+            List<Activity> activityList;
+            if (factory != null) {
+                activityList = factory.getActivityList(profile, 10);
+                assertTrue(activityList.size() > 0);
+                System.out.println(gson.toJson(activityList.get(0), Activity.class));
+
+                if (activityList.size() > 0) {
+                    cStats = (CheckoutStats) factory.generateStats(activityList, cStats);
+                    System.out.println(gson.toJson(cStats));
+                }
             }
         }
     }

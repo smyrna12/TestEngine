@@ -2,6 +2,7 @@ package smyrna.factory.helper;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
@@ -67,21 +68,24 @@ public class CheckoutHelper {
 
     public CheckoutStats generateStats(List<Activity> activityList, CheckoutStats stats) {
         for (Activity activity : activityList) {
-            if (!activity.getBody().getData().isNewVisitor()) {
-                stats.setOldVisCCCount(stats.getOldVisCCCount() + 1);
-            }
-            stats.getVisitorMap2().put(activity.getBody().getVisitorId(), activity.getBody().getVisitorId());
-            stats.setTotEndorsement(stats.getTotEndorsement().add(activity.getBody().getData().getTotalAmount()));
-            for (Product product : activity.getBody().getData().getProducts()) {
-                stats.setProdSaleCount(stats.getProdSaleCount() + product.getQuantity());
-            }
-            DateTimeFormatter formatter = DateTimeFormat.forPattern(Consts.DATE_PATTERN2);
-            DateTime tmpCheckoutDate = formatter.parseDateTime(activity.getCreated());
-            if (tmpCheckoutDate == null || tmpCheckoutDate.isBefore(stats.getFirstCheckoutCompletedDate())) {
-                stats.setFirstCheckoutCompletedDate(tmpCheckoutDate);
-                formatter = DateTimeFormat.forPattern(Consts.DATE_PATTERN);
-                DateTime dt = formatter.parseDateTime(beginDate);
-                stats.setDaysToFirstCheckoutCompletedDate(Days.daysBetween(dt, stats.getFirstCheckoutCompletedDate()).getDays());
+            if (StringUtils.equals(activity.getBody().getActivityCode(), ActivityType.CC.value)) {
+                if (!activity.getBody().getData().isNewVisitor()) {
+                    stats.setOldVisCCCount(stats.getOldVisCCCount() + 1);
+                }
+                stats.getVisitorMap2().put(activity.getBody().getVisitorId(), activity.getBody().getVisitorId());
+
+                stats.setTotEndorsement(stats.getTotEndorsement().add(activity.getBody().getData().getTotalAmount()));
+                for (Product product : activity.getBody().getData().getProducts()) {
+                    stats.setProdSaleCount(stats.getProdSaleCount() + product.getQuantity());
+                }
+                DateTimeFormatter formatter = DateTimeFormat.forPattern(Consts.DATE_PATTERN2);
+                DateTime tmpCheckoutDate = formatter.parseDateTime(activity.getCreated());
+                if (tmpCheckoutDate == null || tmpCheckoutDate.isBefore(stats.getFirstCheckoutCompletedDate())) {
+                    stats.setFirstCheckoutCompletedDate(tmpCheckoutDate);
+                    formatter = DateTimeFormat.forPattern(Consts.DATE_PATTERN);
+                    DateTime dt = formatter.parseDateTime(beginDate);
+                    stats.setDaysToFirstCheckoutCompletedDate(Days.daysBetween(dt, stats.getFirstCheckoutCompletedDate()).getDays());
+                }
             }
         }
 

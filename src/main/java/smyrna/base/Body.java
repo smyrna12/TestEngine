@@ -35,6 +35,10 @@ public class Body {
         return data;
     }
 
+    public String getActivityCode() {
+        return activityCode;
+    }
+
     public static class Builder {
         private String trackingId;
         private String activity;
