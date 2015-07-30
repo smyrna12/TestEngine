@@ -33,10 +33,16 @@ public class IdentitySignupFactory extends ActivityFactory {
     protected Activity getActivity(String appKey, String beginDate, String endDate) {
         String sessionId = RandomStringUtils.randomAlphanumeric(Consts.SESSION_ID_LENGTH);
         Header header = new Header.Builder().appKey(appKey).sessionId(sessionId).build();
+        User user = User.getRandom();
         Data data = new Data();
         Random rnd = new Random();
         data.setFirstTouch(rnd.nextBoolean());
         data.setNewVisitor(rnd.nextBoolean());
+        data.setUserName(user.name());
+        data.setFullName(user.fullName);
+        data.setGender(user.gender);
+        data.setAge(user.age);
+        data.setBirthDate(user.birthDate);
         String visitorId = RandomStringUtils.randomNumeric(Consts.VISITOR_ID_LENGTH);
         Body body = new Body.Builder().activityCode(ActivityType.IS.value).activity(ActivityType.IS.num).visitorId(visitorId).data(data).build();
 

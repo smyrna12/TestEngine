@@ -11,9 +11,14 @@ public class Data {
     private boolean newVisitor;
     private boolean firstTouch;
     private BigDecimal totalAmount;
-    private int orderId;
+    private Integer orderId;
     private List<Product> products;
     private Category category;
+    private String userName;
+    private String fullName;
+    private String gender;
+    private String birthDate;
+    private String age;
 
     public boolean isNewVisitor() {
         return newVisitor;
@@ -39,12 +44,52 @@ public class Data {
         this.totalAmount = totalAmount;
     }
 
-    public int getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public List<Product> getProducts() {
