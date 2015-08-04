@@ -33,6 +33,13 @@ public class Activity {
         return created;
     }
 
+    @Override
+    public String toString() {
+        return "created='" + created + '\'' +
+                ";" + body.toString() +
+                ";" + header.toString();
+    }
+
     public static class Builder {
         private String created;
         private Body body;

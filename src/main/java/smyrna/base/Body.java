@@ -39,6 +39,19 @@ public class Body {
         return activityCode;
     }
 
+    @Override
+    public String toString() {
+        return "trackingId='" + trackingId + '\'' +
+                "; activity='" + activity + '\'' +
+                "; activityCode='" + activityCode + '\'' +
+                "; entityType='" + entityType + '\'' +
+                "; entityId='" + entityId + '\'' +
+                "; entityName='" + entityName + '\'' +
+                "; isFirstActivity='" + isFirstActivity + '\'' +
+                "; visitorId='" + visitorId + '\'' +
+                ";" + data.toString();
+    }
+
     public static class Builder {
         private String trackingId;
         private String activity;

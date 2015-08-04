@@ -42,8 +42,9 @@ class TestBuilder {
     private SmyrnaConfig config;
     private final Gson gson = new Gson();
 
-    private static final Logger logger = Logger.getLogger("smyrna.base");
-    private static final Logger logger2 = Logger.getLogger("smyrna.tester");
+    private static final Logger baseLogger = Logger.getLogger("smyrna.base");
+    private static final Logger testerLogger = Logger.getLogger("smyrna.tester");
+    private static final Logger testerLogger2 = Logger.getLogger("smyrna.tester2");
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("application-messages", new Locale("TR"));
 
     public TestBuilder(boolean test) throws Exception {
@@ -53,7 +54,7 @@ class TestBuilder {
         try {
             xmlStream = new FileInputStream("smyrna-testsuite-configuration.xml");
         } catch (java.io.FileNotFoundException fnfe) {
-            logger2.warn("Configuration file could not be found. Program is going to start with default settings.");
+            testerLogger.warn("Configuration file could not be found. Program is going to start with default settings.");
         }
         if (xmlStream == null) {
             xmlStream = getClass().getClassLoader().getResourceAsStream("smyrna-testsuite-configuration.xml");
@@ -166,7 +167,8 @@ class TestBuilder {
             int response = sendActivity(activity);
             if (response == 0) {
                 nActivityList.add(activity);
-                logger2.info(gson.toJson(activity, Activity.class));
+                testerLogger.info(gson.toJson(activity, Activity.class));
+                testerLogger2.info(activity.toString());
             }
         }
         return nActivityList;
@@ -201,7 +203,7 @@ class TestBuilder {
 
             conn.disconnect();
         } catch (Exception e) {
-            logger2.error(e.getMessage(), e);
+            testerLogger2.error(e.getMessage(), e);
             return -1;
         }
 
@@ -232,16 +234,16 @@ class TestBuilder {
             String visitInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.visit.resource.information"), vStats.getCount(),
                     vStats.getTotVisCount(), vStats.getVisitorMap().size(), vStats.getNewVisCount(),
                     bd.floatValue() * 100, bd2.floatValue() * 100, bd4.floatValue() * 100, (double) vCategoryCount / vStats.getCount(), (double) vProductCount / vStats.getCount());
-            logger.info(visitInfoMsg);
+            baseLogger.info(visitInfoMsg);
 
             String visitSourceInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.visit.source.information"),
                     vStats.getSourceMap().get(smyrna.base.Source.Facebook.name()),
                     vStats.getSourceMap().get(smyrna.base.Source.Google.name()),
                     vStats.getSourceMap().get(smyrna.base.Source.Direct.name()));
-            logger.info(visitSourceInfoMsg);
+            baseLogger.info(visitSourceInfoMsg);
 
             String signupInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.identity.signup.information"), iSignupCount, iSignupCount, iSignupCount, (double) iSignupCount / vStats.getTotVisCount());
-            logger.info(signupInfoMsg);
+            baseLogger.info(signupInfoMsg);
 
             String cCompletedInfoMsg = MessageFormat.format(BUNDLE.getString("smyrna.checkout.completed.information"), cCompletedCount,
                     cStats.getTotEndorsement().toPlainString(), cCompletedCount,
@@ -249,12 +251,12 @@ class TestBuilder {
                     cStats.getProdSaleCount() / cCompletedCount,
                     cStats.getTotEndorsement().floatValue() / vStats.getCount(), cStats.getTotEndorsement().floatValue() / cStats.getVisitorMap2().size(),
                     (float) cCompletedCount / cStats.getVisitorMap2().size(), (float) cStats.getOldVisCCCount() / cCompletedCount, bd5.floatValue() * 100);
-            logger.info(cCompletedInfoMsg);
+            baseLogger.info(cCompletedInfoMsg);
 
             String newsSubscribeMsg = MessageFormat.format(BUNDLE.getString("smyrna.newsletter.subscribe.information"), nSubscribeCount, bd6.floatValue() * 100, nSubscribeCount);
-            logger.info(newsSubscribeMsg);
+            baseLogger.info(newsSubscribeMsg);
         } catch (NullPointerException npe) {
-            logger2.error("Log cannot be generated.", npe);
+            testerLogger2.error("Log cannot be generated.", npe);
         }
     }
 

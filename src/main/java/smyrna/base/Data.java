@@ -107,4 +107,42 @@ public class Data {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        String totalAmountStr = "";
+        if (totalAmount != null) {
+            totalAmountStr = totalAmount.toString();
+        }
+
+        String orderIdStr = "";
+        if (orderId != null) {
+            orderIdStr = orderId.toString();
+        }
+
+        String productsStr = "";
+        if (products != null) {
+            for (Product product : products) {
+                productsStr += "," + product.toString();
+            }
+            productsStr = productsStr.substring(1, productsStr.length());
+        }
+
+        String categoryStr = "";
+        if (category != null) {
+            categoryStr = category.toString();
+        }
+
+        return "newVisitor=" + newVisitor +
+                "; firstTouch=" + firstTouch +
+                "; totalAmount=" + totalAmountStr +
+                "; orderId=" + orderIdStr +
+                "; products=" + productsStr +
+                "; category=" + categoryStr +
+                "; userName='" + userName + '\'' +
+                "; fullName='" + fullName + '\'' +
+                "; gender='" + gender + '\'' +
+                "; birthDate='" + birthDate + '\'' +
+                "; age='" + age + '\'';
+    }
 }

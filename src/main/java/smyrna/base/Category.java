@@ -21,6 +21,11 @@ public class Category {
         return categoryId;
     }
 
+    @Override
+    public String toString() {
+        return "categoryName='" + categoryName + '\'' + "; categoryId=" + categoryId;
+    }
+
     public static class Builder {
         private Integer categoryId;
         private String categoryName;

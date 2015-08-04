@@ -46,6 +46,27 @@ public class Product {
         return categories;
     }
 
+    @Override
+    public String toString() {
+        String categoriesStr = "";
+        if (categories != null) {
+            for (Category category : categories) {
+                categoriesStr += "," + category.toString();
+            }
+            categoriesStr = categoriesStr.substring(1, categoriesStr.length());
+        }
+
+        return "modelCode=" + modelCode +
+                "; modelName='" + modelName + '\'' +
+                "; name='" + name + '\'' +
+                "; unitPrice=" + unitPrice +
+                "; quantity=" + quantity +
+                "; itemCode='" + itemCode + '\'' +
+                "; currency='" + currency + '\'' +
+                "; totalPrice=" + totalPrice +
+                "; categories=" + categoriesStr;
+    }
+
     public static class Builder {
         private Integer modelCode;
         private String modelName;

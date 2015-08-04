@@ -35,7 +35,11 @@ public class ActivityTest {
 
     private SmyrnaConfig config;
     private final Gson gson = new Gson();
-    private static final Logger logger2 = Logger.getLogger("smyrna.tester");
+
+    private static final Logger baseLogger = Logger.getLogger("smyrna.base");
+    private static final Logger testerLogger = Logger.getLogger("smyrna.tester");
+    private static final Logger testerLogger2 = Logger.getLogger("smyrna.tester2");
+
 
     @Before
     public void setup() throws IOException, SchemaValidator.SchemaException, JAXBException {
@@ -44,7 +48,7 @@ public class ActivityTest {
         try {
             xmlStream = new FileInputStream("smyrna-testsuite-configuration.xml");
         } catch (java.io.FileNotFoundException fnfe) {
-            logger2.warn("Configuration file could not be found. Program is going to start with default settings.");
+            testerLogger.warn("Configuration file could not be found. Program is going to start with default settings.");
         }
         if (xmlStream == null) {
             xmlStream = getClass().getClassLoader().getResourceAsStream("smyrna-testsuite-configuration.xml");
@@ -88,6 +92,21 @@ public class ActivityTest {
     }
 
     @Test
+    public void shouldProduceAndPrintIdentitySignup() {
+        for (Profile profile : config.getProfile()) {
+            int iSignupCount = 0;
+            ActivityFactory factory = ActivityFactoryProducer.getFactory(ActivityType.IS);
+            List<Activity> activityList;
+            if (factory != null) {
+                activityList = factory.getActivityList(profile, 10);
+                printActivityList(activityList);
+                assertTrue(activityList.size() > 0);
+                System.out.println(gson.toJson(activityList.get(0), Activity.class));
+            }
+        }
+    }
+
+    @Test
     public void shouldProduceCheckoutCompletedAndGenerateStats() {
         for (Profile profile : config.getProfile()) {
             CheckoutStats cStats = null;
@@ -97,13 +116,20 @@ public class ActivityTest {
             if (factory != null) {
                 activityList = factory.getActivityList(profile, 10);
                 assertTrue(activityList.size() > 0);
-                System.out.println(gson.toJson(activityList.get(0), Activity.class));
+                printActivityList(activityList);
 
                 if (activityList.size() > 0) {
                     cStats = (CheckoutStats) factory.generateStats(activityList, cStats);
                     System.out.println(gson.toJson(cStats));
                 }
             }
+        }
+    }
+
+    private void printActivityList(List<Activity> activityList) {
+        for (Activity activity : activityList) {
+            testerLogger.info(gson.toJson(activity, Activity.class));
+            testerLogger2.info(activity.toString());
         }
     }
 }

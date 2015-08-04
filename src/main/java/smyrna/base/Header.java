@@ -57,6 +57,29 @@ public class Header {
         return utmSource;
     }
 
+    @Override
+    public String toString() {
+        return "appKey='" + appKey + '\'' +
+                "; token='" + token + '\'' +
+                "; appId='" + appId + '\'' +
+                "; sessionId='" + sessionId + '\'' +
+                "; agent='" + agent + '\'' +
+                "; channel='" + channel + '\'' +
+                "; referrer='" + referrer + '\'' +
+                "; referringDomain='" + referringDomain + '\'' +
+                "; uri='" + uri + '\'' +
+                "; queryString='" + queryString + '\'' +
+                "; userId='" + userId + '\'' +
+                "; client='" + client + '\'' +
+                "; ipAddress='" + ipAddress + '\'' +
+                "; marketingActivityID='" + marketingActivityID + '\'' +
+                "; utmSource='" + utmSource + '\'' +
+                "; utmMedium='" + utmMedium + '\'' +
+                "; utmTerm='" + utmTerm + '\'' +
+                "; utmContent='" + utmContent + '\'' +
+                "; utmCampaign='" + utmCampaign + '\'';
+    }
+
     public static class Builder {
         private String appKey;
         private String token;
